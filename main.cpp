@@ -1,10 +1,18 @@
 /* Copyright 2017 Pollonium */
-#include <iostream>
+#include "iostream"
+#include "sort.h"
+#include "basics.h"
 
 int main() {
-    int i;
-    int n;
-    int z;
+    int i = 0;
+    int n = 99;
+
+    std::cout << i << ' ' << n << std::endl << "Swapping:" << std::endl;
+
+    swap(&i, &n);
+
+    std::cout << i << ' ' << n << std::endl;
+
     int X[1000];
 
     std::cin >> n;
@@ -13,20 +21,13 @@ int main() {
         std::cin >> X[i];
     }
 
-    i = 0;
-
-    while (i < n - 1) {
-        if (X[i] <= X[i + 1]) {
-            i++;
-        } else {
-            z = X[i];
-            X[i] = X[i + 1];
-            X[i + 1] = z;
-            if (i > 0) {
-                i--;
-            }
-        }
+    for (i = 0; i < n; i++) {
+        std::cout << X[i] << ' ';
     }
+
+    std::cout << std::endl;
+
+    sortPlain(X, n);
 
     for (i = 0; i < n; i++) {
         std::cout << X[i] << ' ';
