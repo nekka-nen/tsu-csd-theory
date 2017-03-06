@@ -5,7 +5,6 @@
 bool sortPlain(int* array, int length) {
     if (length > 0) {
         int i = 0;
-        int z;
         while (i < length - 1) {
             if (array[i] <= array[i + 1]) {
                 i++;
