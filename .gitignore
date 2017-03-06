@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+### CMake template
+CMakeScripts
+Testing
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+
+.idea/
+CMakeLists.txt
+cmake-build-debug/
