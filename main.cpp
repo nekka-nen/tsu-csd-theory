@@ -4,36 +4,44 @@
 #include "basics.h"
 
 int main() {
-    int i = 0;
-    int n = 99;
+    int i;
+    int length;
 
-    std::cout << i << ' ' << n << std::endl << "Swapping:" << std::endl;
+    int staticArray[1000];
 
-    swap(&i, &n);
+    std::cin >> length;
 
-    std::cout << i << ' ' << n << std::endl;
-
-    int X[1000];
-
-    std::cin >> n;
-
-    for (i = 0; i < n; i++) {
-        std::cin >> X[i];
+    for (i = 0; i < length; i++) {
+        std::cin >> staticArray[i];
     }
 
-    for (i = 0; i < n; i++) {
-        std::cout << X[i] << ' ';
+    int* dynamicArray = new int[length];
+
+    arrayCopy(staticArray, dynamicArray, length);
+
+    for (i = 0; i < length; i++) {
+        std::cout << staticArray[i] << ' ';
+    }
+
+    std::cout << std::endl;
+
+    sortPlain(staticArray, length);
+
+    for (i = 0; i < length; i++) {
+        std::cout << staticArray[i] << ' ';
     }
 
     std::cout << std::endl;
 
-    sortPlain(X, n);
+    sortPlain(dynamicArray, length);
 
-    for (i = 0; i < n; i++) {
-        std::cout << X[i] << ' ';
+    for (i = 0; i < length; i++) {
+        std::cout << dynamicArray[i] << ' ';
     }
 
     std::cout << std::endl;
+
+    delete dynamicArray;
 
     return 0;
 }
