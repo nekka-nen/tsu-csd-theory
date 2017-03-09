@@ -1,6 +1,6 @@
 /* Copyright 2017 Pollonium */
-#include "sort.h"
-#include "basics.h"
+#include "sort.hpp"
+#include "basics.hpp"
 
 bool sortPlain(int* array, int length) {
     if (length > 0) {

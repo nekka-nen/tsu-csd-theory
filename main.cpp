@@ -1,7 +1,7 @@
 /* Copyright 2017 Pollonium */
 #include "iostream"
-#include "sort.h"
-#include "basics.h"
+#include "sort.hpp"
+#include "basics.hpp"
 
 int main() {
     int i;
