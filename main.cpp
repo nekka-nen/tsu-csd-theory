@@ -2,46 +2,25 @@
 #include "iostream"
 #include "sort.hpp"
 #include "basics.hpp"
+#include "array.hpp"
 
 int main() {
-    int i;
+    const int LENGTH = 1000;
     int length;
 
-    int staticArray[1000];
+    int staticArray[LENGTH];
+    int staticArrayCopy[LENGTH];
 
-    std::cin >> length;
+    arraySetToZero(staticArray, LENGTH);
+    arrayCopy(staticArray, staticArrayCopy, LENGTH);
 
-    for (i = 0; i < length; i++) {
-        std::cin >> staticArray[i];
-    }
+    arrayScan(staticArray, length);
 
-    int* dynamicArray = new int[length];
+    arrayPrint(staticArray, length);
 
-    arrayCopy(staticArray, dynamicArray, length);
+    sortMerge(0, length, staticArray, staticArrayCopy);
 
-    for (i = 0; i < length; i++) {
-        std::cout << staticArray[i] << ' ';
-    }
-
-    std::cout << std::endl;
-
-    sortPlain(staticArray, length);
-
-    for (i = 0; i < length; i++) {
-        std::cout << staticArray[i] << ' ';
-    }
-
-    std::cout << std::endl;
-
-    sortPlain(dynamicArray, length);
-
-    for (i = 0; i < length; i++) {
-        std::cout << dynamicArray[i] << ' ';
-    }
-
-    std::cout << std::endl;
-
-    delete dynamicArray;
+    arrayPrint(staticArray, length);
 
     return 0;
 }
