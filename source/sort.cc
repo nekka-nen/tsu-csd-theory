@@ -1,6 +1,6 @@
-/* Copyright 2017 Pollonium */
-#include "sort.hpp"
-#include "basics.hpp"
+/* Copyright 2017 vankarish */
+#include "sort.h"
+#include "biky-basic-functions.h"
 
 bool sortPlain(int* array, int length) {
     if (length > 0) {

@@ -1,5 +1,5 @@
-/* Copyright 2017 Pollonium */
-#include "basics.hpp"
+/* Copyright 2017 vankarish */
+#include "biky-basic-functions.h"
 
 void swap(int* first, int* second) {
     int swapped = *first;
