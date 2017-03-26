@@ -22,11 +22,41 @@ int** add(int** first, int** second, int rows, int columns) {
     return sum;
 }
 
-int scalarProduct(int* first, int* second, int length) {
-    int product = 0;
+int* subtract(int* first, int* second, int length) {
+    int* difference = new int[length];
 
     for (int i = 0; i < length; i++) {
-        product += first[i] * second[i];
+        difference[i] = first[i] - second[i];
+    }
+
+    return difference;
+}
+
+int** subtract(int** first, int** second, int rows, int columns) {
+    int** difference = new int*[rows];
+
+    for (int i = 0; i < rows; i++) {
+        difference[i] = subtract(first[i], second[i], columns);
+    }
+
+    return difference;
+}
+
+int* multiply(int* source, int length, int coefficient) {
+    int* product = new int[length];
+
+    for (int i = 0; i < length; i++) {
+        product[i] = source[i] * coefficient;
+    }
+
+    return product;
+}
+
+int** multiply(int** source, int rows, int columns, int coefficient) {
+    int** product = new int*[rows];
+
+    for (int i = 0; i < rows; i++) {
+        product[i] = multiply(source[i], columns, coefficient);
     }
 
     return product;
