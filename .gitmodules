@@ -1,0 +1,3 @@
+[submodule "libs/biky-arrays"]
+	path = libs/biky-arrays
+	url = https://github.com/vankarish/biky-arrays.git
