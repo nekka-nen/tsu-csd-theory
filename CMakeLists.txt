@@ -1,0 +1,11 @@
+
+cmake_minimum_required(VERSION 3.6)
+project(basic_function_usage)
+
+set(CMAKE_CXX_STANDARD 11)
+
+set(SOURCE_FILES
+        source/main.cc
+        )
+
+add_executable(basic_function_usage ${SOURCE_FILES})
