@@ -11,4 +11,6 @@ int* multiplyMatrixVector(int** matrix, int rows, int columns, int* vector);
 
 int** multiplyMatrices(int** first, int** second, int rows, int commonDimension, int columns);
 
+int** power(int** base, int dim, unsigned int exponent);
+
 #endif  // SOURCE_BIKY_LINEAR_ALGEBRA_PRODUCTS_H_

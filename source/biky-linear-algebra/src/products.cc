@@ -1,6 +1,8 @@
 /* Copyright 2017 vankarish */
 
 #include "../products.h"
+#include "../../../libs/biky-arrays/copying.h"
+#include "../../../libs/biky-arrays/set-value.h"
 
 int multiplyScalar(int* first, int* second, int length) {
     int product = 0;
@@ -52,4 +54,21 @@ int** multiplyMatrices(int** first, int** second, int rows, int commonDimension,
     }
     
     return product;
+}
+
+int** power(int** base, int dim, unsigned int exponent) {
+    int** result = setSingleValue(dim, dim, 1);
+    unsigned int tempExp = exponent;
+    int** tempBase = copy(base, dim, dim);
+
+    while (tempExp > 0) {
+        if (tempExp & 1) {
+            tempExp--;
+            result = multiplyMatrices(result, tempBase, dim, dim, dim);
+        }
+        tempExp /= 2;
+        tempBase = multiplyMatrices(tempBase, tempBase, dim, dim, dim);
+    }
+
+    return result;
 }
