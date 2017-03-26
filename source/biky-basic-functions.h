@@ -1,7 +1,7 @@
 /* Copyright 2017 vankarish */
-#ifndef THEORY_SLIDES_1_INTRO_BASICS_H
-#define THEORY_SLIDES_1_INTRO_BASICS_H
+#ifndef SOURCE_BIKY_BASIC_FUNCTIONS_H_
+#define SOURCE_BIKY_BASIC_FUNCTIONS_H_
 
 void swap(int* first, int* second);
 
-#endif //THEORY_SLIDES_1_INTRO_BASICS_H
+#endif  // SOURCE_BIKY_BASIC_FUNCTIONS_H_

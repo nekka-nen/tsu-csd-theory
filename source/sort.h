@@ -1,7 +1,7 @@
 /* Copyright 2017 vankarish */
-#ifndef THEORY_SLIDES_1_INTRO_SORT_H
-#define THEORY_SLIDES_1_INTRO_SORT_H
+#ifndef SOURCE_SORT_H_
+#define SOURCE_SORT_H_
 
 bool sortPlain(int* array, int length);
 
-#endif //THEORY_SLIDES_1_INTRO_SORT_H
+#endif  // SOURCE_SORT_H_
