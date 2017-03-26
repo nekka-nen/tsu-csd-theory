@@ -37,3 +37,19 @@ int* multiplyMatrixVector(int** matrix, int rows, int columns, int* vector) {
 
     return product;
 }
+
+int** multiplyMatrices(int** first, int** second, int rows, int commonDimension, int columns) {
+    int** product = new int*[rows];
+
+    for (int i = 0; i < rows; i++) {
+        product[i] = new int[columns];
+        for (int j = 0; j < columns; j++) {
+            product[i][j] = 0;
+            for (int k = 0; k < commonDimension; k++) {
+                product[i][j] += first[i][k] * second[k][j];
+            }
+        }
+    }
+    
+    return product;
+}
