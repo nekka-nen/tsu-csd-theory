@@ -15,4 +15,8 @@ int* multiply(int* source, int length, int coefficient);
 
 int** multiply(int** source, int rows, int columns, int coefficient);
 
+double* divide(double* source, int length, double coefficient, int startingFrom = 0);
+
+double* subtract(double* first, double* second, int length, int startingFrom = 0, double coefficient = 1);
+
 #endif  // SOURCE_BIKY_LINEAR_ALGEBRA_LINEAR_OPERATIONS_H_

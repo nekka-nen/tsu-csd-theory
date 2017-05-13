@@ -6,6 +6,11 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
         source/main.cc
+        source/biky-basic-functions.cc
+        source/biky-linear-algebra/src/linear-operations.cc
+        source/biky-linear-algebra/src/initializations.cc
+        source/13-determinant.cc
+        source/13-inverse.cc
         )
 
 add_executable(basic_function_usage ${SOURCE_FILES})

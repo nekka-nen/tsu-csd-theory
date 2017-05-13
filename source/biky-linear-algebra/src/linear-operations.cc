@@ -61,3 +61,23 @@ int** multiply(int** source, int rows, int columns, int coefficient) {
 
     return product;
 }
+
+double* divide(double* source, int length, double coefficient, int startingFrom) {
+  double* quotient = new double[length];
+
+  for (int i = startingFrom; i < length; i++) {
+    quotient[i] = source[i] / coefficient;
+  }
+
+  return quotient;
+}
+
+double* subtract(double* first, double* second, int length, int startingFrom, double coefficient) {
+  double* subtraction = new double[length];
+
+  for (int i = startingFrom; i < length; i++) {
+    subtraction[i] = first[i] - coefficient * second[i];
+  }
+
+  return subtraction;
+}
