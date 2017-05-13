@@ -34,11 +34,9 @@ bool isInvertedCorrectly(double** matrix, double** inverted, double** E, int n)
   {
     for (int j = 0; j < n; j++)
     {
-      std::cout << multiplication[i][j] << ' ';
-      /*if (multiplication[i][j] != E[i][j])
-        return false;*/
+      if (fabs(multiplication[i][j] - E[i][j]) >= eps)
+        return false;
     }
-    std::cout<<std::endl;
   }
 
   return true;
