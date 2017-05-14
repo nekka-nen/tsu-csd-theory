@@ -122,13 +122,13 @@ void solveInverses() {
   double** copy;
   double** E;
 
-  E = initUnit(matrixSize);
 
   for (int testNumber = 1; testNumber <= 4; testNumber++) {
     std::ifstream test(testDir + std::to_string(testNumber));
 
     // initialization
     test >> matrixSize;
+    E = initUnit(matrixSize);
     matrix = new double*[matrixSize];
 
     for (int i = 0; i < matrixSize; i++) {
