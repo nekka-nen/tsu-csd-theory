@@ -3,7 +3,7 @@
 #ifndef determinant_h_
 #define determinant_h_
 
-long double calculateDeterminant(double** matrix, int matrixSize);
+double calculateDeterminant(double** matrix, int matrixSize);
 
 void solveDeterminants();
 

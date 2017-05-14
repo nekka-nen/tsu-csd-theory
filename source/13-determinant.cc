@@ -17,10 +17,12 @@ void print(double** matrix, int matrixSize) {
   }
 }
 
-long double calculateDeterminant(double** matrix, int matrixSize) {
+double calculateDeterminant(double** originalMatrix, int matrixSize) {
+  double** matrix = copyMatrix(originalMatrix, matrixSize);
+
   int rank = matrixSize;
   int sign = 1;
-  long double determinant;
+  double determinant;
 
   for (int i = 0; i < rank; i++) {
     /*выбор ведущего элемента matrix[leadingRow][i]*/
@@ -31,6 +33,7 @@ long double calculateDeterminant(double** matrix, int matrixSize) {
       }
     }
     if (fabs(matrix[leadingRow][i]) < eps) {
+      releaseMemory(matrix, matrixSize);
       return 0;
     } else {
       /*перестановка строк*/
@@ -53,6 +56,7 @@ long double calculateDeterminant(double** matrix, int matrixSize) {
     determinant *= matrix[i][i];
   }
 
+  releaseMemory(matrix, matrixSize);
   return determinant;
 }
 
@@ -60,16 +64,15 @@ void solveDeterminants() {
   std::string dir = ".\\..\\tests\\determinants\\";
   int matrixSize;
   double** matrix;
-  long double determinant;
+  double determinant;
   double expectedDeterminant;
 
-  for (int testNumber = 1; testNumber <= 7; testNumber++) {
+  for (int testNumber = 1; testNumber <= 5; testNumber++) {
     std::ifstream test(dir + std::to_string(testNumber));
 
     // initialization
     test >> matrixSize;
     matrix = new double*[matrixSize];
-
     for (int i = 0; i < matrixSize; i++) {
       matrix[i] = new double[matrixSize];
       for (int j = 0; j < matrixSize; j++) {
@@ -89,10 +92,7 @@ void solveDeterminants() {
     }
 
     // cleanup
-    for (int j = 0; j < matrixSize; j++) {
-      delete [] matrix[j];
-    }
-    delete [] matrix;
+    releaseMemory(matrix, matrixSize);
     test.close();
   }
 }

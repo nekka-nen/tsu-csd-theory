@@ -9,50 +9,37 @@
 #include "./biky-linear-algebra/linear-operations.h"
 #include "./13-determinant.h"
 
-bool isInvertedCorrectly(double** matrix, double** inverted, double** E, int n)
-{
+
+bool isInvertedCorrectly(double** originalMatrix, double** inverted, int n) {
+  double** unitMatrix = initUnit(n);
+  double** matrix = copyMatrix(originalMatrix, n);
   double** multiplication = new double*[n];
-  for (int i = 0; i < n; i++)
-  {
+  for (int i = 0; i < n; i++) {
     multiplication[i] = new double[n];
   }
 
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < n; j++)
-    {
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
       multiplication[i][j] = 0;
-      for (int k = 0; k < n; k++)
-      {
+      for (int k = 0; k < n; k++) {
         multiplication[i][j] += matrix[i][k] * inverted[k][j];
       }
-
     }
   }
 
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < n; j++)
-    {
-      if (fabs(multiplication[i][j] - E[i][j]) >= eps)
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      if (fabs(multiplication[i][j] - unitMatrix[i][j]) >= eps) {
+        releaseMemory(unitMatrix, n);
+        releaseMemory(matrix, n);
         return false;
+      }
     }
   }
 
+  releaseMemory(matrix, n);
+  releaseMemory(unitMatrix, n);
   return true;
-}
-
-double** copyMatrix(double** matrix, int matrixSize) {
-  double** copy = new double*[matrixSize];
-
-  for (int i = 0; i < matrixSize; i++) {
-    copy[i] = new double[matrixSize];
-    for (int j = 0; j < matrixSize; j++) {
-      copy[i][j] = matrix[i][j];
-    }
-  }
-
-  return copy;
 }
 
 bool equal(std::string dir, int testNumber, double** matrix, int matrixSize) {
@@ -73,9 +60,11 @@ bool equal(std::string dir, int testNumber, double** matrix, int matrixSize) {
   return true;
 }
 
-double** getInverse(double** matrix, double** inverse, int matrixSize) {
+double** getInverse(double** originalMatrix, int matrixSize) {
   // ...calculating inverse
   int rank = matrixSize;
+  double** inverse = initUnit(matrixSize);
+  double** matrix = copyMatrix(originalMatrix, matrixSize);
 
   for (int i = 0; i < rank; i++) {
     /*выбор ведущего элемента matrix[leadingRow,i]*/
@@ -109,75 +98,43 @@ double** getInverse(double** matrix, double** inverse, int matrixSize) {
       }
     }
   }
+  releaseMemory(matrix, matrixSize);
   return inverse;
 }
 
 void solveInverses() {
   std::string testDir = ".\\..\\tests\\inverses\\";
   std::string answerDir = testDir + "answers\\";
-
+  std::ifstream test;
   int matrixSize;
   double** matrix;
   double** inverse;
-  double** copy;
-  double** E;
-
+  bool isInvertible;
+  bool testPassed;
 
   for (int testNumber = 1; testNumber <= 4; testNumber++) {
-    std::ifstream test(testDir + std::to_string(testNumber));
-
-    // initialization
+    test.open(testDir + std::to_string(testNumber));
     test >> matrixSize;
-    E = initUnit(matrixSize);
-    matrix = new double*[matrixSize];
-
-    for (int i = 0; i < matrixSize; i++) {
-      matrix[i] = new double[matrixSize];
-      for (int j = 0; j < matrixSize; j++) {
-        test >> matrix[i][j];
-      }
-    }
-
-    copy = copyMatrix(matrix, matrixSize);
-    double determinant = calculateDeterminant(copy, matrixSize);
-    copy = copyMatrix(matrix, matrixSize);
-    bool isDegenerate = !(bool)determinant;
-
-    inverse = initUnit(matrixSize);
-    inverse = getInverse(matrix, inverse, matrixSize);
-
-    std::ifstream degenerateChecking(answerDir + std::to_string(testNumber));
-    std::string buffer;
-    bool expectedDegenerate = false;
-    degenerateChecking >> buffer;
-
-    if (buffer == "вырождена") {
-      expectedDegenerate = true;
-    }
-
-    // checking
-    if ((!isDegenerate && equal(answerDir, testNumber, inverse, matrixSize) && isInvertedCorrectly(copy, inverse, E, matrixSize)) || (expectedDegenerate && isDegenerate)) {
-      std::cout << "Test " << std::to_string(testNumber) << " passed" << std::endl;
-    } else {
-      std::cout << "Test " << std::to_string(testNumber) << " failed" << std::endl;
-    }
-
-    // cleanup
-    for (int j = 0; j < matrixSize; j++) {
-      delete [] matrix[j];
-      delete [] copy[j];
-    }
-
-    delete [] matrix;
-    delete [] copy;
-
-    if (!isDegenerate) {
-      for (int j = 0; j < matrixSize; j++) {
-        delete [] inverse[j];
-      }
-      delete [] inverse;
-    }
-
+    matrix = readMatrix(test, matrixSize);
     test.close();
+    isInvertible = (bool)calculateDeterminant(matrix, matrixSize);
+
+    if (isInvertible) {
+      inverse = getInverse(matrix, matrixSize);
+      testPassed = equal(answerDir, testNumber, inverse, matrixSize) && isInvertedCorrectly(matrix, inverse, matrixSize);
+      releaseMemory(inverse, matrixSize);
+    } else {
+      test.open(answerDir + std::to_string(testNumber));
+      std::string buffer;
+      test >> buffer;
+      testPassed = buffer == "вырождена";
+      test.close();
+    }
+
+    std::cout << "Test " << std::to_string(testNumber);
+    testPassed ? std::cout << " passed" : std::cout << " failed";
+    std::cout << std::endl;
+
+    releaseMemory(matrix, matrixSize);
   }
 }
