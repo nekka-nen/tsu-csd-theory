@@ -62,7 +62,7 @@ int** multiply(int** source, int rows, int columns, int coefficient) {
     return product;
 }
 
-double* divide(double* source, int length, double coefficient, int startingFrom) {
+double* divide(double* source, double coefficient, int length, int startingFrom) {
   double* quotient = new double[length];
 
   for (int i = startingFrom; i < length; i++) {

@@ -72,3 +72,19 @@ int** power(int** base, int dim, unsigned int exponent) {
 
     return result;
 }
+
+double** multiplyMatrices(double** first, double** second, int& rows, int& commonDimension, int& columns) {
+    double** product = new double*[rows];
+
+    for (int i = 0; i < rows; i++) {
+        product[i] = new double[columns];
+        for (int j = 0; j < columns; j++) {
+            product[i][j] = 0;
+            for (int k = 0; k < commonDimension; k++) {
+                product[i][j] += first[i][k] * second[k][j];
+            }
+        }
+    }
+
+    return product;
+}

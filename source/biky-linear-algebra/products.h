@@ -13,4 +13,6 @@ int** multiplyMatrices(int** first, int** second, int rows, int commonDimension,
 
 int** power(int** base, int dim, unsigned int exponent);
 
+double** multiplyMatrices(double** first, double** second, int& rows, int& commonDimension, int& columns);
+
 #endif  // SOURCE_BIKY_LINEAR_ALGEBRA_PRODUCTS_H_
